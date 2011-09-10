@@ -43,7 +43,7 @@ app.get('/post/:author/:slug', function(req, res){
     function(viewPath, title){
         res.render(viewPath, {
           locals: {
-            title: req.param('slug'),
+            title: title,
           },
           layout: 'postLayout'
         });
