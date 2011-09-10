@@ -39,25 +39,14 @@ app.get('/', function(req, res){
 });
 
 app.get('/post/:author/:slug', function(req, res){
-        res.render('post', {
-          locals: {
-            title: req.param('slug'),
-            layout: 'postLayout'
-          }
-        });
-  console.log('H');
-  //debugger;
-  if (false)
-  postUtils.renderPost(req.param('author'), req.param('slug'),
-    function(viewPath){
-        console.log('view:' + viewPath);
+ postUtils.renderPost(req.param('author'), req.param('slug'),
+    function(viewPath, title){
         res.render(viewPath, {
           locals: {
             title: req.param('slug'),
-            layout: 'postLayout'
-          }
+          },
+          layout: 'postLayout'
         });
-        console.log('end');
     });
 });
 
