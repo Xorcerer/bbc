@@ -11,7 +11,10 @@ var app = module.exports = express.createServer();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
+  app.set('view engine', 'ejs');
+  app.set('view options', {
+    layout: false
+  });
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -27,18 +30,37 @@ app.configure('production', function(){
 });
 
 // Routes
+var postUtils = require('./utils.js');
 
 app.get('/', function(req, res){
   res.render('index', {
-    title: 'Express'
+    locals: { title: 'Express' }
   });
 });
 
-app.get('/post', function(req, res){
-  res.render('index', {
-    title: 'Express'
-  });
+app.get('/post/:author/:slug', function(req, res){
+        res.render('post', {
+          locals: {
+            title: req.param('slug'),
+            layout: 'postLayout'
+          }
+        });
+  console.log('H');
+  //debugger;
+  if (false)
+  postUtils.renderPost(req.param('author'), req.param('slug'),
+    function(viewPath){
+        console.log('view:' + viewPath);
+        res.render(viewPath, {
+          locals: {
+            title: req.param('slug'),
+            layout: 'postLayout'
+          }
+        });
+        console.log('end');
+    });
 });
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+
