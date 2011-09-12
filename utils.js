@@ -10,13 +10,19 @@ function getTitle(postPath){
 }
 exports.renderPost = function(author, slug, renderer){
   var postPath = path.join('posts', author, slug);
-  extensions.forEach(function(ext){
+
+  // some() will stop at the first callback returns true.
+  var postFound = extensions.some(function(ext){
     var viewPath = postPath + '.' + ext;
     var fullPath = path.join(__dirname, 'views', viewPath);
-    path.exists(fullPath, function(exists){
-      if (!exists)
-        return;
-      renderer.call(null, viewPath, getTitle(fullPath));
-    });
+
+    if (!path.existsSync(fullPath))
+        return false;
+
+    renderer.call(null, viewPath, getTitle(fullPath));
+    return true; // Break out the some() iteration.
   });
+
+  if (!postFound)
+    renderer.call(null, '404.txt', 'Post Not Found');
 };

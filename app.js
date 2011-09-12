@@ -15,6 +15,7 @@ app.configure(function(){
   app.set('view options', {
     layout: false
   });
+  app.register('.txt', require('ejs'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -45,7 +46,7 @@ app.get('/post/:author/:slug', function(req, res){
           locals: {
             title: title,
           },
-          layout: 'postLayout'
+          layout: 'postLayout.ejs'
         });
     });
 });
