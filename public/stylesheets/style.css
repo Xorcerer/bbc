@@ -1,8 +1,12 @@
 @import url("blueprint/screen.css");
 
 body{
-	background-color: #444;
-	background-image: -webkit-gradient(linear, left center, right center, from(transparent),color-stop(49.9%,transparent),color-stop(50%,#222),color-stop(50%, white),color-stop(50.1%, white),color-stop(50.1%,#eee), to(#eee));
+	background-color: #333;
+	background-image: -webkit-linear-gradient(0,transparent,transparent 49.9%,#222 50%,#fff 50%,#fff 50.1%,hsla(0,50%,70%,1) 50.1%,hsla(0,50%,70%,1) 50.6%,hsla(60,50%,70%,1) 50.6%,hsla(60,50%,70%,1) 51.1%,#eee 51.1%,#eee);
+}
+.darken h1, .darken h2, .darken h3, .darken h4, .darken h5, .darken h6 { color:#ddd; }
+.darken p{
+	color: #ccc;
 }
 aside{
 	position: fixed;
@@ -148,7 +152,12 @@ nav li a span{
 .textile{
 	background:#AFAFB1 url(../img/bg_tile.jpg);
 }
-.container section{
+section.posts{
+	width: 50%;
+	float: left;
+}
+section.posts article{
+	margin:20px;
 }
 .container aside{
 	border-right: 2px solid rgba(204,204,204,1);
@@ -166,17 +175,29 @@ nav li a span{
 	border-top: 2px solid rgba(194,194,194,1);
 }
 .container article{
-	border-bottom:1px solid #ddd;
-	box-shadow: 0 -1px 0 rgba(255,255,255,0.8) inset;
+	border-bottom:1px solid #fdfdfd;
+	box-shadow: 0 -1px 0 #dfdfdf inset;
 }
-.container .simple article{
-	border-bottom: 1px solid #222;
-	box-shadow: 0 -1px 0 #555 inset;
+.container .darken article{
+	border-bottom: 1px solid #393939;
+	box-shadow: 0 -1px 0 #292929 inset;
 }	
 footer{
-	text-align:center; padding: 20px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 10px 0;
+	background-color: #eee;
+	background-image: -webkit-linear-gradient(0,transparent,transparent 49.9%,#fff 50%,#222 50%,#222 50.1%,#333 50.1%,#333);
+	box-shadow: 0 3px 3px hsla(0,0%,0%,0.3) inset;
 }
-
+footer .command{
+	float: left;
+	width: 50%;
+}
+footer .command p,footer .command input{
+	margin:0 10px;
+}
 
 
 /* secondary styles
